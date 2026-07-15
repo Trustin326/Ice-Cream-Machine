@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Ice Cream Machine — bringing cool treats, colorful fun, and classic ice cream truck favorites to your neighborhood."
+  />
+
+  <title>Ice Cream Machine</title>
+
+  <style>
+    :root {
+      --blue: #159bc4;
+      --deep-blue: #233e88;
+      --pink: #f26da2;
+      --orange: #f05a24;
+      --cream: #fff9ef;
+      --yellow: #ffd95a;
+      --ink: #17233b;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+
+    img {
+      width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Navigation */
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 6%;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 3px solid var(--blue);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+      font-size: 1.25rem;
+      color: var(--deep-blue);
+    }
+
+    .logo-mark {
+      display: grid;
+      place-items: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50% 50% 45% 45%;
+      background: linear-gradient(135deg, var(--pink), var(--blue));
+      color: white;
+      font-size: 1.5rem;
+      box-shadow: 0 5px 0 var(--deep-blue);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      font-weight: 700;
+    }
+
+    .nav-links a:hover {
+      color: var(--pink);
+    }
+
+    .nav-button {
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: var(--orange);
+      color: white;
+    }
+
+    /* Hero */
+
+    .hero {
+      min-height: 88vh;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      align-items: center;
+      gap: 50px;
+      padding: 70px 7%;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 10% 10%, #dff7ff 0, transparent 28%),
+        radial-gradient(circle at 90% 20%, #ffd6e6 0, transparent 26%),
+        var(--cream);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 18px;
+      padding: 8px 15px;
+      border-radius: 999px;
+      background: #d9f5ff;
+      color: var(--deep-blue);
+      font-size: 0.85rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      max-width: 720px;
+      font-size: clamp(3.5rem, 8vw, 7.5rem);
+      line-height: 0.9;
+      letter-spacing: -0.06em;
+      color: var(--deep-blue);
+    }
+
+    .hero h1 span {
+      color: var(--pink);
+    }
+
+    .hero p {
+      max-width: 620px;
+      margin: 28px 0;
+      font-size: 1.15rem;
+      color: #4b5871;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 15px 24px;
+      border-radius: 999px;
+      font-weight: 900;
+      transition: transform 0.2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-3px);
+    }
+
+    .button-primary {
+      background: var(--orange);
+      color: white;
+      box-shadow: 0 6px 0 #bf3e12;
+    }
+
+    .button-secondary {
+      border: 3px solid var(--deep-blue);
+      color: var(--deep-blue);
+      background: white;
+    }
+
+    .hero-photo {
+      position: relative;
+      transform: rotate(2deg);
+    }
+
+    .hero-photo img {
+      height: 580px;
+      object-fit: cover;
+      border: 10px solid white;
+      border-radius: 34px;
+      box-shadow: 18px 18px 0 var(--pink);
+    }
+
+    .floating-badge {
+      position: absolute;
+      left: -30px;
+      bottom: 35px;
+      padding: 18px 22px;
+      border: 5px solid white;
+      border-radius: 20px;
+      background: var(--yellow);
+      font-size: 1.15rem;
+      font-weight: 900;
+      transform: rotate(-7deg);
+      box-shadow: 0 12px 30px rgba(31, 42, 68, 0.18);
+    }
+
+    /* Treats */
+
+    .section {
+      padding: 90px 7%;
+    }
+
+    .section-heading {
+      max-width: 700px;
+      margin-bottom: 45px;
+    }
+
+    .section-heading span {
+      color: var(--pink);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .section-heading h2 {
+      margin-top: 8px;
+      font-size: clamp(2.4rem, 5vw, 4.8rem);
+      line-height: 1;
+      color: var(--deep-blue);
+      letter-spacing: -0.04em;
+    }
+
+    .treat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .treat-card {
+      padding: 30px;
+      border-radius: 28px;
+      background: white;
+      border: 3px solid #e7edf4;
+      transition: 0.25s ease;
+    }
+
+    .treat-card:hover {
+      transform: translateY(-8px) rotate(-1deg);
+      border-color: var(--pink);
+      box-shadow: 0 18px 40px rgba(35, 62, 136, 0.12);
+    }
+
+    .treat-icon {
+      font-size: 3.3rem;
+      margin-bottom: 16px;
+    }
+
+    .treat-card h3 {
+      margin-bottom: 8px;
+      color: var(--deep-blue);
+      font-size: 1.4rem;
+    }
+
+    /* Gallery */
+
+    .gallery-section {
+      background: var(--deep-blue);
+      color: white;
+    }
+
+    .gallery-section .section-heading h2,
+    .gallery-section .section-heading span {
+      color: white;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 20px;
+    }
+
+    .gallery img {
+      height: 100%;
+      min-height: 430px;
+      object-fit: cover;
+      border-radius: 28px;
+      border: 6px solid white;
+    }
+
+    /* Visit */
+
+    .visit {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .visit-photo img {
+      max-height: 600px;
+      object-fit: cover;
+      border-radius: 32px;
+      box-shadow: -16px 16px 0 var(--blue);
+    }
+
+    .info-box {
+      margin-top: 25px;
+      padding: 28px;
+      border-radius: 25px;
+      background: white;
+      border-left: 8px solid var(--pink);
+      box-shadow: 0 15px 40px rgba(29, 47, 82, 0.08);
+    }
+
+    /* CTA */
+
+    .cta {
+      margin: 30px 7% 80px;
+      padding: 60px;
+      text-align: center;
+      border-radius: 38px;
+      color: white;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(255,255,255,.17), transparent 15%),
+        linear-gradient(135deg, var(--pink), var(--orange));
+    }
+
+    .cta h2 {
+      margin-bottom: 16px;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      line-height: 1;
+    }
+
+    .cta p {
+      max-width: 650px;
+      margin: 0 auto 26px;
+      font-size: 1.1rem;
+    }
+
+    .cta .button {
+      background: white;
+      color: var(--deep-blue);
+    }
+
+    footer {
+      padding: 30px 7%;
+      text-align: center;
+      background: var(--ink);
+      color: #cfd7e6;
+    }
+
+    @media (max-width: 850px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero,
+      .visit,
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 45px;
+      }
+
+      .hero-photo img {
+        height: 450px;
+      }
+
+      .floating-badge {
+        left: 10px;
+      }
+
+      .treat-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cta {
+        padding: 45px 24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="nav">
+    <a class="logo" href="#home">
+      <span class="logo-mark">🍦</span>
+      Ice Cream Machine
+    </a>
+
+    <div class="nav-links">
+      <a href="#treats">Treats</a>
+      <a href="#gallery">Our Truck</a>
+      <a href="#visit">Find Us</a>
+      <a class="nav-button" href="#contact">Book the Truck</a>
+    </div>
+  </nav>
+
+  <main>
+
+    <section class="hero" id="home">
+      <div>
+        <div class="eyebrow">Cool treats • Big smiles</div>
+
+        <h1>
+          Happiness,
+          <span>served cold.</span>
+        </h1>
+
+        <p>
+          Classic cones, colorful pops, frozen favorites, and plenty of
+          neighborhood nostalgia. Hear the music? The Ice Cream Machine is nearby.
+        </p>
+
+        <div class="hero-actions">
+          <a class="button button-primary" href="#treats">Explore the treats</a>
+          <a class="button button-secondary" href="#contact">Book an event</a>
+        </div>
+      </div>
+
+      <div class="hero-photo">
+        <img
+          src="ice-cream-truck-1.jpg"
+          alt="Colorful Ice Cream Machine truck with illustrated frozen treats"
+        />
+        <div class="floating-badge">🍨 The fun is here!</div>
+      </div>
+    </section>
+
+
+    <section class="section" id="treats">
+      <div class="section-heading">
+        <span>Pick your favorite</span>
+        <h2>Something cool for everyone.</h2>
+      </div>
+
+      <div class="treat-grid">
+        <article class="treat-card">
+          <div class="treat-icon">🍦</div>
+          <h3>Classic Cones</h3>
+          <p>
+            Creamy, cool, and always a good idea. The timeless ice cream truck favorite.
+          </p>
+        </article>
+
+        <article class="treat-card">
+          <div class="treat-icon">🍧</div>
+          <h3>Colorful Favorites</h3>
+          <p>
+            Bright frozen treats and fun character pops made for sunny afternoons.
+          </p>
+        </article>
+
+        <article class="treat-card">
+          <div class="treat-icon">🍭</div>
+          <h3>Frozen Pops</h3>
+          <p>
+            Fruity, refreshing, and full of color — the perfect way to beat the heat.
+          </p>
+        </article>
+      </div>
+    </section>
+
+
+    <section class="section gallery-section" id="gallery">
+      <div class="section-heading">
+        <span>Meet the truck</span>
+        <h2>You’ll know us when you see us.</h2>
+      </div>
+
+      <div class="gallery">
+        <img
+          src="ice-cream-truck-3.jpg"
+          alt="Side of the Ice Cream Machine truck decorated with ice cream characters"
+        />
+
+        <img
+          src="ice-cream-truck-2.jpg"
+          alt="Ice Cream Machine truck door with colorful illustrated ice cream scoops"
+        />
+      </div>
+    </section>
+
+
+    <section class="section visit" id="visit">
+      <div class="visit-photo">
+        <img
+          src="ice-cream-truck-2.jpg"
+          alt="Colorful ice cream artwork on the Ice Cream Machine truck"
+        />
+      </div>
+
+      <div>
+        <div class="section-heading">
+          <span>Find the fun</span>
+          <h2>Bringing the ice cream shop to you.</h2>
+        </div>
+
+        <p>
+          Catch the Ice Cream Machine around the neighborhood or invite the
+          truck to your next celebration, school event, community gathering,
+          or summer party.
+        </p>
+
+        <div class="info-box">
+          <strong>Perfect for:</strong><br />
+          Birthdays • Schools • Festivals • Community Events • Private Parties
+        </div>
+      </div>
+    </section>
+
+
+    <section class="cta" id="contact">
+      <h2>Let’s make your event cooler. 🍦</h2>
+
+      <p>
+        Bring the Ice Cream Machine to your next event and give your guests
+        something worth smiling about.
+      </p>
+
+      <!-- Replace the email address with the real business email -->
+      <a class="button" href="mailto:hello@icecreammachine.com">
+        Book the Ice Cream Machine
+      </a>
+    </section>
+
+  </main>
+
+  <footer>
+    © <span id="year"></span> Ice Cream Machine. All rights reserved.
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
